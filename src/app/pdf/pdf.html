@@ -1,5 +1,8 @@
 <div class="tab-view">
     <div class="tab-header">
+        @if (selectedTool() !== null) {
+        <button class="btn-back" (click)="goToMenu()">← Wszystkie narzędzia</button>
+        }
         <div class="tab-icon">📄</div>
         <h1>PDF</h1>
         <p>Narzędzia do pracy z plikami PDF</p>
