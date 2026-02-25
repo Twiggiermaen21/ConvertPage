@@ -105,8 +105,28 @@ export class MergeToolComponent {
     async merge() {
         this.isProcessing.set(true);
         const formData = new FormData();
-        this.files().forEach(f => formData.append('files', f, f.name));
-        formData.append('page_order', JSON.stringify(this.pages().map(p => ({ fileIndex: p.fileIndex, pageNum: p.pageNum }))));
+        const allFiles = this.files();
+        const orderedPages = this.pages();
+
+        // Build a new file order based on the sequence pages appear in the reordered list
+        const oldToNewIndex = new Map<number, number>();
+        const orderedFiles: File[] = [];
+        for (const page of orderedPages) {
+            if (!oldToNewIndex.has(page.fileIndex)) {
+                oldToNewIndex.set(page.fileIndex, orderedFiles.length);
+                orderedFiles.push(allFiles[page.fileIndex]);
+            }
+        }
+
+        // Append files in the reordered sequence
+        orderedFiles.forEach(f => formData.append('files', f, f.name));
+
+        // Remap fileIndex in page_order to match the new file order
+        const pageOrder = orderedPages.map(p => ({
+            fileIndex: oldToNewIndex.get(p.fileIndex)!,
+            pageNum: p.pageNum
+        }));
+        formData.append('page_order', JSON.stringify(pageOrder));
 
         try {
             const response = await fetch('http://localhost:8000/api/pdf/merge', { method: 'POST', body: formData });

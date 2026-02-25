@@ -1,0 +1,107 @@
+<div class="tool-view">
+
+    <div class="tool-title">
+        <span>✂️</span>
+        <h2>Rozdziel PDF</h2>
+    </div>
+
+    <!-- Step indicator -->
+    <div class="steps">
+        <div class="step" [class.active]="step() === 'upload'" [class.done]="step() === 'arenas'">
+            <span class="step-num">1</span><span class="step-label">Upload</span>
+        </div>
+        <div class="step-line" [class.active]="step() === 'arenas'"></div>
+        <div class="step" [class.active]="step() === 'arenas'">
+            <span class="step-num">2</span><span class="step-label">Rozdziel</span>
+        </div>
+    </div>
+
+    <div class="tool-content">
+        <!-- Step 1: Upload -->
+        @if (step() === 'upload') {
+        <div class="upload-area" (click)="fileInput.click()" (dragover)="onDragOver($event)"
+            (drop)="onDropFile($event)">
+            <input #fileInput type="file" accept=".pdf" hidden (change)="onFileSelected($event)" />
+            <div class="upload-icon">⬆️</div>
+            <p>Przeciągnij plik PDF tutaj lub kliknij</p>
+            <button class="btn-primary">Wybierz plik</button>
+        </div>
+
+        @if (file()) {
+        <div class="file-list">
+            <div class="file-list-header">
+                <span>1 plik · {{ fileSize() }}</span>
+            </div>
+            <div class="file-item">
+                <span class="file-item-icon">📄</span>
+                <div class="file-item-info">
+                    <span class="file-item-name">{{ file()!.name }}</span>
+                    <span class="file-item-size">{{ formatSize(file()!.size) }}</span>
+                </div>
+                <button class="btn-remove-small" (click)="removeFile($event)">✕</button>
+            </div>
+        </div>
+        <div class="actions">
+            <button class="btn-primary btn-next" (click)="goToArenas()">Dalej — rozdziel strony →</button>
+        </div>
+        }
+        }
+
+        <!-- Step 2: Arenas -->
+        @if (step() === 'arenas') {
+        @if (isLoadingPages()) {
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>Wczytywanie stron...</p>
+        </div>
+        } @else {
+        <p class="step-desc">Przeciągaj strony między grupami, aby rozdzielić dokument:</p>
+
+        <div cdkDropListGroup class="arenas-container">
+            @for (arena of arenas(); track arena.id) {
+            <div class="arena">
+                <div class="arena-header">
+                    <span class="arena-label">{{ arena.label }}</span>
+                    <span class="arena-count">{{ arena.pages.length }} str.</span>
+                    @if (arenas().length > 2) {
+                    <button class="btn-remove-arena" (click)="removeArena(arena.id)" title="Usuń grupę">✕</button>
+                    }
+                </div>
+                <div cdkDropList [cdkDropListData]="arena.pages" [id]="'arena-' + arena.id"
+                    (cdkDropListDropped)="onPageDrop($event)" class="arena-pages"
+                    [class.empty]="arena.pages.length === 0">
+                    @if (arena.pages.length === 0) {
+                    <div class="arena-empty">
+                        <span>Przeciągnij strony tutaj</span>
+                    </div>
+                    }
+                    @for (page of arena.pages; track page.pageNum + '-' + $index) {
+                    <div class="page-card" cdkDrag>
+                        <div class="page-card-preview">
+                            <img [src]="page.thumbnail" [alt]="'Strona ' + page.pageNum" draggable="false" />
+                        </div>
+                        <div class="page-card-info">
+                            <span class="page-card-num">{{ page.pageNum }}</span>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+        </div>
+
+        <div class="arena-actions">
+            <button class="btn-add-arena" (click)="addArena()">＋ Dodaj grupę</button>
+        </div>
+
+        <div class="actions actions-split">
+            <button class="btn-secondary" (click)="goBack()">← Wróć</button>
+            <button class="btn-primary btn-download" (click)="split()"
+                [disabled]="isProcessing() || !hasNonEmptyArenas()">
+                @if (isProcessing()) { ⏳ Przetwarzanie... } @else { ✂️ Rozdziel i pobierz }
+            </button>
+        </div>
+        }
+        }
+    </div>
+</div>

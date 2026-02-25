@@ -26,8 +26,13 @@
     <app-merge-tool (back)="goToMenu()" />
     }
 
+    <!-- Split tool -->
+    @if (selectedTool() === 'split') {
+    <app-split-tool (back)="goToMenu()" />
+    }
+
     <!-- Other tools -->
-    @if (selectedTool() !== null && selectedTool() !== 'merge') {
+    @if (selectedTool() !== null && selectedTool() !== 'merge' && selectedTool() !== 'split') {
     <app-generic-tool [toolId]="selectedTool()!" (back)="goToMenu()" />
     }
 </div>
