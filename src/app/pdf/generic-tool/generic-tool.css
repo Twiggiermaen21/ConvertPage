@@ -1,0 +1,153 @@
+/* ═══ Tool sub-view ═══ */
+.tool-view {
+    position: relative;
+}
+
+.btn-back {
+    position: absolute;
+    top: -1.5rem;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+    color: #94a3b8;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    z-index: 1;
+}
+
+.btn-back:hover {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: rgba(99, 102, 241, 0.3);
+    color: #a5b4fc;
+    transform: translateX(-3px);
+    box-shadow: 0 2px 12px rgba(99, 102, 241, 0.15);
+}
+
+.tool-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.tool-title span {
+    font-size: 1.75rem;
+}
+
+.tool-title h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    margin: 0;
+}
+
+.tool-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* ═══ Upload ═══ */
+.upload-area {
+    position: relative;
+    border: 2px dashed rgba(99, 102, 241, 0.3);
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    background: rgba(99, 102, 241, 0.03);
+    cursor: pointer;
+}
+
+.upload-area:hover {
+    border-color: rgba(99, 102, 241, 0.6);
+    background: rgba(99, 102, 241, 0.06);
+}
+
+.upload-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.upload-area p {
+    color: #94a3b8;
+    margin-bottom: 1.5rem;
+}
+
+.file-name {
+    color: #e2e8f0;
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+}
+
+.file-size {
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.btn-remove-corner {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    border: none;
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.btn-remove-corner:hover {
+    background: rgba(239, 68, 68, 0.3);
+}
+
+/* ═══ Buttons ═══ */
+.btn-primary {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-download {
+    padding: 0.85rem 2rem;
+}

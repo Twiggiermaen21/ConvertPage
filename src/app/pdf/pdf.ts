@@ -1,38 +1,24 @@
 import { Component, signal } from '@angular/core';
+import { PdfTool, ToolDef, PDF_TOOLS } from './pdf-shared';
+import { MergeToolComponent } from './merge/merge';
+import { GenericToolComponent } from './generic-tool/generic-tool';
 
 @Component({
     selector: 'app-pdf',
     standalone: true,
+    imports: [MergeToolComponent, GenericToolComponent],
     templateUrl: './pdf.html',
     styleUrl: './pdf.css'
 })
-
 export class PdfComponent {
-    selectedFile = signal<File | null>(null);
+    selectedTool = signal<PdfTool | null>(null);
+    tools = PDF_TOOLS;
 
-    onFileSelected(event: Event) {
-        const input = event.target as HTMLInputElement;
-        if (input.files?.length) {
-            this.selectedFile.set(input.files[0]);
-        }
+    selectTool(tool: PdfTool) {
+        this.selectedTool.set(tool);
     }
 
-    onDragOver(event: DragEvent) {
-        event.preventDefault();
-        event.stopPropagation();
-    }
-
-    onDrop(event: DragEvent) {
-        event.preventDefault();
-        event.stopPropagation();
-        const files = event.dataTransfer?.files;
-        if (files?.length) {
-            this.selectedFile.set(files[0]);
-        }
-    }
-
-    removeFile(event: Event) {
-        event.stopPropagation();
-        this.selectedFile.set(null);
+    goToMenu() {
+        this.selectedTool.set(null);
     }
 }

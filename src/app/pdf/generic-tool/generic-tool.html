@@ -1,0 +1,33 @@
+<div class="tool-view">
+    <button class="btn-back" (click)="back.emit()">← Wszystkie narzędzia</button>
+
+    <div class="tool-title">
+        <span>{{ toolDef.icon }}</span>
+        <h2>{{ toolDef.label }}</h2>
+    </div>
+
+    <div class="tool-content">
+        <div class="upload-area" (click)="fileInput.click()" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+            <input #fileInput type="file" accept=".pdf" hidden (change)="onFileSelected($event)" />
+            @if (file()) {
+            <button class="btn-remove-corner" (click)="removeFile($event)">✕</button>
+            }
+            <div class="upload-icon">⬆️</div>
+            @if (file()) {
+            <p class="file-name">{{ file()!.name }}</p>
+            <p class="file-size">{{ formatSize(file()!.size) }}</p>
+            } @else {
+            <p>Przeciągnij plik PDF tutaj lub kliknij</p>
+            }
+            <button class="btn-primary">Wybierz plik</button>
+        </div>
+
+        @if (file()) {
+        <div class="actions">
+            <button class="btn-primary btn-download" (click)="process()" [disabled]="isProcessing()">
+                @if (isProcessing()) { ⏳ Przetwarzanie... } @else { 🚀 Przetwórz }
+            </button>
+        </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="tool-view">
+    <button class="btn-back" (click)="back.emit()">← Wszystkie narzędzia</button>
+
+    <div class="tool-title">
+        <span>🔗</span>
+        <h2>Połącz PDF</h2>
+    </div>
+
+    <!-- Step indicator -->
+    <div class="steps">
+        <div class="step" [class.active]="step() === 'upload'" [class.done]="step() === 'reorder'">
+            <span class="step-num">1</span><span class="step-label">Upload</span>
+        </div>
+        <div class="step-line" [class.active]="step() === 'reorder'"></div>
+        <div class="step" [class.active]="step() === 'reorder'">
+            <span class="step-num">2</span><span class="step-label">Kolejność</span>
+        </div>
+    </div>
+
+    <div class="tool-content">
+        <!-- Step 1: Upload -->
+        @if (step() === 'upload') {
+        <div class="upload-area" (click)="fileInput.click()" (dragover)="onDragOver($event)"
+            (drop)="onDropFiles($event)">
+            <input #fileInput type="file" accept=".pdf" multiple hidden (change)="onFilesSelected($event)" />
+            <div class="upload-icon">⬆️</div>
+            <p>Przeciągnij pliki PDF tutaj lub kliknij</p>
+            <button class="btn-primary">Wybierz pliki</button>
+        </div>
+
+        @if (files().length > 0) {
+        <div class="file-list">
+            <div class="file-list-header">
+                <span>{{ files().length }} plików · {{ totalSize() }}</span>
+            </div>
+            @for (file of files(); track file.name + $index) {
+            <div class="file-item">
+                <span class="file-item-icon">📄</span>
+                <div class="file-item-info">
+                    <span class="file-item-name">{{ file.name }}</span>
+                    <span class="file-item-size">{{ formatSize(file.size) }}</span>
+                </div>
+                <button class="btn-remove-small" (click)="removeFile($index, $event)">✕</button>
+            </div>
+            }
+        </div>
+        <div class="actions">
+            <button class="btn-primary btn-next" (click)="goToReorder()">Dalej — ustaw kolejność →</button>
+        </div>
+        }
+        }
+
+        <!-- Step 2: Reorder -->
+        @if (step() === 'reorder') {
+        @if (isLoadingPages()) {
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>Wczytywanie stron...</p>
+        </div>
+        } @else {
+        <p class="step-desc">Przeciągnij strony, aby ustawić kolejność:</p>
+        <div cdkDropList cdkDropListOrientation="mixed" (cdkDropListDropped)="onPageReorder($event)" class="page-grid">
+            @for (page of pages(); track page.sourceFile + page.pageNum + $index) {
+            <div class="page-card" cdkDrag>
+                <div class="page-card-preview">
+                    <img [src]="page.thumbnail" [alt]="'Strona ' + page.pageNum" draggable="false" />
+                </div>
+                <div class="page-card-info">
+                    <span class="page-card-num">{{ $index + 1 }}</span>
+                    <span class="page-card-source" [title]="page.sourceFile">s.{{ page.pageNum }} · {{ page.sourceFile
+                        }}</span>
+                </div>
+            </div>
+            }
+        </div>
+        <div class="actions actions-split">
+            <button class="btn-secondary" (click)="goBack()">← Wróć</button>
+            <button class="btn-primary btn-download" (click)="merge()" [disabled]="isProcessing()">
+                @if (isProcessing()) { ⏳ Przetwarzanie... } @else { 📥 Połącz i pobierz }
+            </button>
+        </div>
+        }
+        }
+    </div>
+</div>

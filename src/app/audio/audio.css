@@ -35,12 +35,37 @@
 }
 
 .upload-area {
+    position: relative;
     border: 2px dashed rgba(236, 72, 153, 0.3);
     border-radius: 1rem;
     padding: 3rem 2rem;
     text-align: center;
     transition: all 0.3s ease;
     background: rgba(236, 72, 153, 0.03);
+    cursor: pointer;
+}
+
+.btn-remove {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    border: none;
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.btn-remove:hover {
+    background: rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
 }
 
 .upload-area:hover {
