@@ -9,7 +9,7 @@ def merge_pdfs(self, input_paths: list[str], output_path: str):
     :param output_path: Ścieżka docelowa dla połączonego pliku.
     """
     self.update_state(state="PROCESSING", meta={"status": "Łączenie dokumentów PDF..."})
-    
+    print(f"Łączenie plików: {input_paths} do {output_path}")
     try:
         merger = pypdf.PdfWriter()
         

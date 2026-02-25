@@ -1,0 +1,44 @@
+# =========================
+# PYTHON & BACKEND
+# =========================
+# Środowiska wirtualne (zajmują setki megabajtów)
+.venv/
+venv/
+env/
+
+# Pamięć podręczna Pythona
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pliki tymczasowe naszej aplikacji (BARDZO WAŻNE!)
+# Nie chcemy wysyłać na GitHuba pobranych filmów z YT ani PDF-ów użytkowników!
+backend/temp_workspace/
+temp_workspace/
+downloads/
+uploads/
+
+# Sekrety i konfiguracje (nigdy nie udostępniaj plików .env)
+.env
+*.env
+
+# =========================
+# ANGULAR & FRONTEND
+# =========================
+# Biblioteki Node.js (zajmują mnóstwo miejsca)
+node_modules/
+
+# Skompilowane wersje aplikacji Angulara
+dist/
+.angular/
+
+# =========================
+# IDE & SYSTEM
+# =========================
+# Ustawienia edytorów kodu (VS Code, WebStorm, PyCharm)
+.vscode/
+.idea/
+
+# Śmieci systemowe (Windows / macOS)
+Thumbs.db
+.DS_Store
