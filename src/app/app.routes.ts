@@ -13,5 +13,9 @@ export const routes: Routes = [
     {
         path: 'yt',
         loadComponent: () => import('./yt/yt').then(m => m.YtComponent)
+    },
+    {
+        path: 'img',
+        loadComponent: () => import('./img/img').then(m => m.ImgComponent)
     }
 ];

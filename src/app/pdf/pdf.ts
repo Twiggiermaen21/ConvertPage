@@ -2,12 +2,12 @@ import { Component, signal } from '@angular/core';
 import { PdfTool, ToolDef, PDF_TOOLS } from './pdf-shared';
 import { MergeToolComponent } from './merge/merge';
 import { SplitToolComponent } from './split/split';
-import { GenericToolComponent } from './generic-tool/generic-tool';
+import { CompressToolComponent } from './compress/compress';
 
 @Component({
     selector: 'app-pdf',
     standalone: true,
-    imports: [MergeToolComponent, SplitToolComponent, GenericToolComponent],
+    imports: [MergeToolComponent, SplitToolComponent, CompressToolComponent],
     templateUrl: './pdf.html',
     styleUrl: './pdf.css'
 })

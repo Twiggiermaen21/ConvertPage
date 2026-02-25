@@ -1,0 +1,53 @@
+<div class="tool-view">
+
+    <div class="tool-title">
+        <span>📦</span>
+        <h2>Kompresuj PDF</h2>
+    </div>
+
+    <div class="tool-content">
+        <div class="upload-area" (click)="fileInput.click()" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+            <input #fileInput type="file" accept=".pdf" hidden (change)="onFileSelected($event)" />
+            @if (file()) {
+            <button class="btn-remove-corner" (click)="removeFile($event)">✕</button>
+            }
+            <div class="upload-icon">⬆️</div>
+            @if (file()) {
+            <p class="file-name">{{ file()!.name }}</p>
+            <p class="file-size">{{ formatSize(file()!.size) }}</p>
+            } @else {
+            <p>Przeciągnij plik PDF tutaj lub kliknij</p>
+            }
+            <button class="btn-primary">Wybierz plik</button>
+        </div>
+
+        @if (file()) {
+        <div class="slider-section">
+            @if (isDetectingDpi()) {
+            <div class="dpi-detecting">
+                <div class="spinner-small"></div>
+                <span>Wykrywanie DPI dokumentu...</span>
+            </div>
+            } @else {
+            <div class="slider-header">
+                <span class="slider-label">Rozdzielczość (DPI)</span>
+                <span class="slider-value">{{ dpi() }} DPI — {{ dpiLabel }}</span>
+            </div>
+            <input type="range" min="72" [max]="originalDpi()" step="1" [value]="dpi()" (input)="onDpiChange($event)"
+                class="slider" />
+            <div class="slider-range">
+                <span>72 DPI — mniejszy plik</span>
+                <span>{{ originalDpi() }} DPI — oryginał</span>
+            </div>
+            }
+        </div>
+
+        <div class="actions">
+            <button class="btn-primary btn-download" (click)="compress()"
+                [disabled]="isProcessing() || isDetectingDpi()">
+                @if (isProcessing()) { ⏳ Kompresowanie... } @else { 📦 Kompresuj i pobierz }
+            </button>
+        </div>
+        }
+    </div>
+</div>

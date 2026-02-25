@@ -57,41 +57,43 @@
         } @else {
         <p class="step-desc">Przeciągaj strony między grupami, aby rozdzielić dokument:</p>
 
-        <div cdkDropListGroup class="arenas-container">
-            @for (arena of arenas(); track arena.id) {
-            <div class="arena">
-                <div class="arena-header">
-                    <span class="arena-label">{{ arena.label }}</span>
-                    <span class="arena-count">{{ arena.pages.length }} str.</span>
-                    @if (arenas().length > 2) {
-                    <button class="btn-remove-arena" (click)="removeArena(arena.id)" title="Usuń grupę">✕</button>
-                    }
-                </div>
-                <div cdkDropList [cdkDropListData]="arena.pages" [id]="'arena-' + arena.id"
-                    (cdkDropListDropped)="onPageDrop($event)" class="arena-pages"
-                    [class.empty]="arena.pages.length === 0">
-                    @if (arena.pages.length === 0) {
-                    <div class="arena-empty">
-                        <span>Przeciągnij strony tutaj</span>
+        <div class="arenas-wrapper">
+            <div cdkDropListGroup class="arenas-container">
+                @for (arena of arenas(); track arena.id) {
+                <div class="arena">
+                    <div class="arena-header">
+                        <span class="arena-label">{{ arena.label }}</span>
+                        <span class="arena-count">{{ arena.pages.length }} str.</span>
+                        @if (arenas().length > 2) {
+                        <button class="btn-remove-arena" (click)="removeArena(arena.id)" title="Usuń grupę">✕</button>
+                        }
                     </div>
-                    }
-                    @for (page of arena.pages; track page.pageNum + '-' + $index) {
-                    <div class="page-card" cdkDrag>
-                        <div class="page-card-preview">
-                            <img [src]="page.thumbnail" [alt]="'Strona ' + page.pageNum" draggable="false" />
+                    <div cdkDropList [cdkDropListData]="arena.pages" [id]="'arena-' + arena.id"
+                        (cdkDropListDropped)="onPageDrop($event)" class="arena-pages"
+                        [class.empty]="arena.pages.length === 0">
+                        @if (arena.pages.length === 0) {
+                        <div class="arena-empty">
+                            <span>Przeciągnij strony tutaj</span>
                         </div>
-                        <div class="page-card-info">
-                            <span class="page-card-num">{{ page.pageNum }}</span>
+                        }
+                        @for (page of arena.pages; track page.pageNum + '-' + $index) {
+                        <div class="page-card" cdkDrag>
+                            <div class="page-card-preview">
+                                <img [src]="page.thumbnail" [alt]="'Strona ' + page.pageNum" draggable="false" />
+                            </div>
+                            <div class="page-card-info">
+                                <span class="page-card-num">{{ page.pageNum }}</span>
+                            </div>
                         </div>
+                        }
                     </div>
-                    }
                 </div>
+                }
             </div>
-            }
-        </div>
 
-        <div class="arena-actions">
-            <button class="btn-add-arena" (click)="addArena()">＋ Dodaj grupę</button>
+            <div class="arena-actions">
+                <button class="btn-add-arena" (click)="addArena()">＋ Dodaj grupę</button>
+            </div>
         </div>
 
         <div class="actions actions-split">
