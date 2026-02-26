@@ -1,25 +1,32 @@
 from app.core.celery_app import celery
-from rembg import remove
+from rembg import remove, new_session
 from PIL import Image
-import os
 
 @celery.task(bind=True, name="app.services.image_service.remove_background")
 def remove_background(self, input_path: str, output_path: str):
-    self.update_state(state="PROCESSING", meta={"status": "Uruchamianie modelu AI i usuwanie tła..."})
+    self.update_state(state="PROCESSING", meta={"status": "Uruchamianie zaawansowanego modelu AI..."})
     print(f"\n[WORKER] Usuwanie tła ze zdjęcia: {input_path}")
     
     try:
-        # Otwieramy plik wejściowy (biblioteka PIL)
         input_image = Image.open(input_path)
         
-        # --- WIELKA MAGIA AI ---
-        # Wywołujemy funkcję rembg.remove, która analizuje zdjęcie i zwraca obraz bez tła
-        output_image = remove(input_image)
+        # 1. Inicjalizujemy nowszy, inteligentniejszy model do ogólnego użytku
+        # (Przy pierwszym użyciu Worker pobierze ten model z internetu, co potrwa kilka sekund)
+        session = new_session("isnet-general-use")
         
-        # Zapisujemy wynik fizycznie na dysku w formacie PNG
+        # 2. Wywołujemy usuwanie tła z zaawansowanymi parametrami
+        output_image = remove(
+            input_image,
+            session=session,              # Używamy lepszego modelu
+            alpha_matting=True,           # Włączamy dokładne wygładzanie krawędzi
+            alpha_matting_foreground_threshold=240,
+            alpha_matting_background_threshold=10,
+            alpha_matting_erode_size=10,  # Rozmiar pędzla korygującego (domyślnie 10)
+            post_process_mask=True        # Dodatkowe czyszczenie artefaktów
+        )
+        
         output_image.save(output_path, format="PNG")
         
-        # Zamykamy pliki, żeby zwolnić zasoby
         input_image.close()
         output_image.close()
         
