@@ -1,37 +1,35 @@
-version: '3.8'
+name: pdf-yt-audio
 
 services:
-  # 1. Nasza skrzynka podawcza
   redis:
+    container_name: pdf-yt-audio-redis
     image: redis:latest
     ports:
-      - "6379:6379"
+      # Zewnętrzny (Windows): 16379 | Wewnętrzny (Docker): 6379
+      - "16379:6379"
 
-  # 2. Główny serwer FastAPI
   api:
+    container_name: pdf-yt-audio-api
     build: .
-    # Odpalamy serwer, nasłuchując na wszystkich interfejsach (0.0.0.0)
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     ports:
-      - "8000:8000"
+      # Zewnętrzny (Windows): 8090 | Wewnętrzny (Docker): 8000
+      - "8090:8000"
     volumes:
-      # Mapujemy pliki, żeby "Hot Reload" działał wewnątrz Dockera!
       - .:/backend
     environment:
-      # Pydantic-settings automatycznie podmieni 'localhost' na 'redis'
+      # UWAGA: Tu zostaje 6379, bo wewnątrz swojej sieci kontenery komunikują się po portach wewnętrznych!
       - REDIS_BROKER_URL=redis://redis:6379/0
       - REDIS_BACKEND_URL=redis://redis:6379/1
     depends_on:
       - redis
 
-  # 3. Nasz Pracownik w tle
   worker:
+    container_name: pdf-yt-audio-worker
     build: .
-    # Zauważ: usunęliśmy --pool=solo! W Dockerze (Linux) Celery działa w pełni natywnie.
     command: celery -A app.core.celery_app worker --loglevel=info
     volumes:
       - .:/backend
-      # Współdzielimy folder tymczasowy z API, żeby Worker widział pliki PDF
       - ./temp_workspace:/backend/temp_workspace
     environment:
       - REDIS_BROKER_URL=redis://redis:6379/0
