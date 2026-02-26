@@ -21,7 +21,8 @@
         @if (step() === 'upload') {
         <div class="upload-area" (click)="fileInput.click()" (dragover)="onDragOver($event)"
             (drop)="onDropFiles($event)">
-            <input #fileInput type="file" accept=".pdf" multiple hidden (change)="onFilesSelected($event)" />
+            <input #fileInput type="file" accept=".pdf" multiple hidden (click)="$event.stopPropagation()"
+                (change)="onFilesSelected($event)" />
             <div class="upload-icon">⬆️</div>
             <p>Przeciągnij pliki PDF tutaj lub kliknij</p>
             <button class="btn-primary">Wybierz pliki</button>

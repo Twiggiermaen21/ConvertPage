@@ -7,7 +7,8 @@
 
     <div class="tab-content">
         <div class="upload-area" (click)="fileInput.click()" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
-            <input #fileInput type="file" accept="audio/*" hidden (change)="onFileSelected($event)" />
+            <input #fileInput type="file" accept="audio/*" hidden (click)="$event.stopPropagation()"
+                (change)="onFileSelected($event)" />
             @if (selectedFile()) {
             <button class="btn-remove" (click)="removeFile($event)" title="Usuń plik">✕</button>
             }
@@ -18,7 +19,29 @@
             } @else {
             <p>Przeciągnij plik audio tutaj lub kliknij, aby wybrać</p>
             }
+            @if (!selectedFile()) {
             <button class="btn-primary">Wybierz plik</button>
+            }
         </div>
+
+        @if (selectedFile()) {
+        <div class="format-selection">
+            <span class="format-label">Wybierz format docelowy:</span>
+            <div class="format-options">
+                <button class="btn-format" [class.active]="targetFormat() === 'mp3'"
+                    (click)="setFormat('mp3')">MP3</button>
+                <button class="btn-format" [class.active]="targetFormat() === 'wav'"
+                    (click)="setFormat('wav')">WAV</button>
+                <button class="btn-format" [class.active]="targetFormat() === 'm4a'"
+                    (click)="setFormat('m4a')">M4A</button>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn-primary btn-download" (click)="convert()" [disabled]="isProcessing()">
+                @if (isProcessing()) { ⏳ Konwertowanie... ({{ elapsedSeconds() }}s) } @else { 🎵 Konwertuj format }
+            </button>
+        </div>
+        }
     </div>
 </div>

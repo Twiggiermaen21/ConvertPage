@@ -7,7 +7,8 @@
 
     <div class="tool-content">
         <div class="upload-area" (click)="fileInput.click()" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
-            <input #fileInput type="file" accept=".pdf" hidden (change)="onFileSelected($event)" />
+            <input #fileInput type="file" accept=".pdf" hidden (click)="$event.stopPropagation()"
+                (change)="onFileSelected($event)" />
             @if (file()) {
             <button class="btn-remove-corner" (click)="removeFile($event)">✕</button>
             }
