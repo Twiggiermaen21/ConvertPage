@@ -18,6 +18,8 @@ export class MergeToolComponent {
     pages = signal<PdfPage[]>([]);
     step = signal<MergeStep>('upload');
     isProcessing = signal(false);
+    elapsedSeconds = signal(0);
+    private timerInterval: any;
     isLoadingPages = signal(false);
 
     totalSize = computed(() => {
@@ -104,6 +106,11 @@ export class MergeToolComponent {
 
     async merge() {
         this.isProcessing.set(true);
+        this.elapsedSeconds.set(0);
+        this.timerInterval = setInterval(() => {
+            this.elapsedSeconds.update(s => s + 1);
+        }, 1000);
+
         const formData = new FormData();
         const allFiles = this.files();
         const orderedPages = this.pages();
@@ -141,6 +148,7 @@ export class MergeToolComponent {
         } catch (error) {
             console.error('PDF merge error:', error);
         } finally {
+            clearInterval(this.timerInterval);
             this.isProcessing.set(false);
         }
     }

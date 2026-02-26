@@ -12,6 +12,8 @@ export class CompressToolComponent {
 
     file = signal<File | null>(null);
     isProcessing = signal(false);
+    elapsedSeconds = signal(0);
+    private timerInterval: any;
     dpi = signal(150);
     originalDpi = signal(300);
     isDetectingDpi = signal(false);
@@ -126,6 +128,11 @@ export class CompressToolComponent {
         if (!file) return;
 
         this.isProcessing.set(true);
+        this.elapsedSeconds.set(0);
+        this.timerInterval = setInterval(() => {
+            this.elapsedSeconds.update(s => s + 1);
+        }, 1000);
+
         const formData = new FormData();
         formData.append('file', file, file.name);
         formData.append('dpi', this.dpi().toString());
@@ -147,6 +154,7 @@ export class CompressToolComponent {
         } catch (error) {
             console.error('PDF compress error:', error);
         } finally {
+            clearInterval(this.timerInterval);
             this.isProcessing.set(false);
         }
     }

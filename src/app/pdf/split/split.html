@@ -100,7 +100,7 @@
             <button class="btn-secondary" (click)="goBack()">← Wróć</button>
             <button class="btn-primary btn-download" (click)="split()"
                 [disabled]="isProcessing() || !hasNonEmptyArenas()">
-                @if (isProcessing()) { ⏳ Przetwarzanie... } @else { ✂️ Rozdziel i pobierz }
+                @if (isProcessing()) { ⏳ Przetwarzanie... ({{ elapsedSeconds() }}s) } @else { ✂️ Rozdziel i pobierz }
             </button>
         </div>
         }

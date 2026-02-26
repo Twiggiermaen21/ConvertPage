@@ -24,6 +24,8 @@ export class SplitToolComponent {
     step = signal<SplitStep>('upload');
     isLoadingPages = signal(false);
     isProcessing = signal(false);
+    elapsedSeconds = signal(0);
+    private timerInterval: any;
     arenas = signal<Arena[]>([]);
     private nextArenaId = 1;
 
@@ -150,6 +152,11 @@ export class SplitToolComponent {
 
     async split() {
         this.isProcessing.set(true);
+        this.elapsedSeconds.set(0);
+        this.timerInterval = setInterval(() => {
+            this.elapsedSeconds.update(s => s + 1);
+        }, 1000);
+
         const f = this.file();
         if (!f) return;
 
@@ -177,6 +184,7 @@ export class SplitToolComponent {
         } catch (error) {
             console.error('PDF split error:', error);
         } finally {
+            clearInterval(this.timerInterval);
             this.isProcessing.set(false);
         }
     }

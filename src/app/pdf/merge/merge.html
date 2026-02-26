@@ -75,7 +75,7 @@
         <div class="actions actions-split">
             <button class="btn-secondary" (click)="goBack()">← Wróć</button>
             <button class="btn-primary btn-download" (click)="merge()" [disabled]="isProcessing()">
-                @if (isProcessing()) { ⏳ Przetwarzanie... } @else { 📥 Połącz i pobierz }
+                @if (isProcessing()) { ⏳ Przetwarzanie... ({{ elapsedSeconds() }}s) } @else { 📥 Połącz i pobierz }
             </button>
         </div>
         }

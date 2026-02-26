@@ -45,7 +45,7 @@
         <div class="actions">
             <button class="btn-primary btn-download" (click)="compress()"
                 [disabled]="isProcessing() || isDetectingDpi()">
-                @if (isProcessing()) { ⏳ Kompresowanie... } @else { 📦 Kompresuj i pobierz }
+                @if (isProcessing()) { ⏳ Kompresowanie... ({{ elapsedSeconds() }}s) } @else { 📦 Kompresuj i pobierz }
             </button>
         </div>
         }

@@ -12,7 +12,10 @@
     @if (selectedTool() === null) {
     <div class="tool-grid">
         @for (tool of tools; track tool.id) {
-        <button class="tool-card" (click)="selectTool(tool.id)">
+        <button class="tool-card" [class.disabled]="tool.disabled" (click)="!tool.disabled && selectTool(tool.id)">
+            @if(tool.disabled) {
+            <span class="badge">{{ tool.disabledReason }}</span>
+            }
             <span class="tool-card-icon">{{ tool.icon }}</span>
             <span class="tool-card-label">{{ tool.label }}</span>
             <span class="tool-card-desc">{{ tool.desc }}</span>
@@ -34,5 +37,10 @@
     <!-- Compress tool -->
     @if (selectedTool() === 'compress') {
     <app-compress-tool (back)="goToMenu()" />
+    }
+
+    <!-- To JPG tool -->
+    @if (selectedTool() === 'to-jpg') {
+    <app-to-jpg-tool (back)="goToMenu()" />
     }
 </div>

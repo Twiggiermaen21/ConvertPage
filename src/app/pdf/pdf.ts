@@ -3,11 +3,12 @@ import { PdfTool, ToolDef, PDF_TOOLS } from './pdf-shared';
 import { MergeToolComponent } from './merge/merge';
 import { SplitToolComponent } from './split/split';
 import { CompressToolComponent } from './compress/compress';
+import { ToJpgToolComponent } from './to-jpg/to-jpg';
 
 @Component({
     selector: 'app-pdf',
     standalone: true,
-    imports: [MergeToolComponent, SplitToolComponent, CompressToolComponent],
+    imports: [MergeToolComponent, SplitToolComponent, CompressToolComponent, ToJpgToolComponent],
     templateUrl: './pdf.html',
     styleUrl: './pdf.css'
 })

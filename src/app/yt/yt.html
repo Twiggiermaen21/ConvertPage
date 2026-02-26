@@ -9,8 +9,11 @@
         <div class="url-input-area">
             <label for="ytUrl">Wklej link do filmu YouTube</label>
             <div class="input-group">
-                <input type="url" id="ytUrl" placeholder="https://www.youtube.com/watch?v=..." />
-                <button class="btn-primary">Pobierz</button>
+                <input type="url" id="ytUrl" placeholder="https://www.youtube.com/watch?v=..." [value]="url()"
+                    (input)="onUrlChange($event)" [disabled]="isProcessing()" />
+                <button class="btn-primary" (click)="download()" [disabled]="isProcessing() || !url()">
+                    @if (isProcessing()) { ⏳ Pobieranie... ({{ elapsedSeconds() }}s) } @else { Pobierz }
+                </button>
             </div>
         </div>
     </div>
