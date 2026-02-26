@@ -9,3 +9,5 @@ python-multipart
 yt-dlp
 ffmpeg-python
 pdf2docx
+rembg          
+onnxruntime   

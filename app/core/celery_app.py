@@ -26,4 +26,5 @@ celery.autodiscover_tasks([
     "app.services.pdf.split",
     "app.services.pdf.compress",
     "app.services.pdf.to_jpg",
+    "app.services.image_service",
 ])
