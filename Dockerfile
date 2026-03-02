@@ -28,9 +28,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Tworzymy folder na cache modeli rembg (domyślnie ~/.u2net)
 RUN mkdir -p /root/.u2net
 
-# Tworzymy malutki skrypt Pythona, który odpala rembg.remove na pustych bajtach.
-# To wymusi na bibliotece pobranie domyślnego modelu i zapisanie go w cache.
-RUN python3 -c 'import rembg; rembg.remove(bytes())'
+# Pobieramy model u2net bezpośrednio z GitHuba, aby był dostępny offline
+RUN apt-get update && apt-get install -y wget && \
+    wget -qO /root/.u2net/u2net.onnx https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net.onnx
 
 # Kopiujemy całą resztę Twojego kodu do kontenera
 COPY . .
