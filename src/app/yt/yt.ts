@@ -28,7 +28,7 @@ export class YtComponent {
         }, 1000);
 
         try {
-            const response = await fetch('http://localhost:8000/api/yt/download', {
+            const response = await fetch('/api/yt/download', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url: link })
