@@ -136,7 +136,7 @@ export class MergeToolComponent {
         formData.append('page_order', JSON.stringify(pageOrder));
 
         try {
-            const response = await fetch('http://localhost:8000/api/pdf/merge', { method: 'POST', body: formData });
+            const response = await fetch('/api/pdf/merge', { method: 'POST', body: formData });
             if (!response.ok) throw new Error('Merge failed');
             const blob = await response.blob();
             const url = window.URL.createObjectURL(blob);

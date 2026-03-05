@@ -58,7 +58,7 @@ export class AudioComponent {
         formData.append('target_format', this.targetFormat());
 
         try {
-            const response = await fetch('http://localhost:8000/api/audio/convert', {
+            const response = await fetch('/api/audio/convert', {
                 method: 'POST',
                 body: formData,
             });

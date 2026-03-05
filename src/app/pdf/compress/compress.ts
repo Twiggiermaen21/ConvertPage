@@ -138,7 +138,7 @@ export class CompressToolComponent {
         formData.append('dpi', this.dpi().toString());
 
         try {
-            const response = await fetch('http://localhost:8000/api/pdf/compress', {
+            const response = await fetch('/api/pdf/compress', {
                 method: 'POST',
                 body: formData,
             });

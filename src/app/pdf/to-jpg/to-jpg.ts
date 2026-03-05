@@ -59,7 +59,7 @@ export class ToJpgToolComponent {
         formData.append('file', file, file.name);
 
         try {
-            const response = await fetch('http://localhost:8000/api/pdf/to-jpg', {
+            const response = await fetch('/api/pdf/to-jpg', {
                 method: 'POST',
                 body: formData,
             });

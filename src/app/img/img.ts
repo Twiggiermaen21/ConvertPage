@@ -55,7 +55,7 @@ export class ImgComponent {
         formData.append('file', file, file.name);
 
         try {
-            const response = await fetch('http://localhost:8000/api/image/remove-background', {
+            const response = await fetch('/api/image/remove-background', {
                 method: 'POST',
                 body: formData,
             });
