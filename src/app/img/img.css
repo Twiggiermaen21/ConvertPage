@@ -1,11 +1,10 @@
 .tab-view {
-    padding: 2.5rem 3rem;
-    animation: fadeIn 0.35s ease-out;
+    animation: fadeIn 0.4s ease-out;
 }
 
 .tab-header {
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3.5rem;
 }
 
 .tab-icon {
@@ -14,16 +13,15 @@
 }
 
 .tab-header h1 {
-    font-size: 2.25rem;
-    font-weight: 800;
-    color: #f5f5f7;
-    margin: 0 0 0.35rem 0;
-    letter-spacing: -0.03em;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem 0;
 }
 
 .tab-header p {
-    color: rgba(255, 255, 255, 0.45);
-    font-size: 1.05rem;
+    color: var(--text-secondary);
+    font-size: 1rem;
     margin: 0;
 }
 
@@ -34,69 +32,73 @@
 
 .upload-area {
     position: relative;
-    border: 2px dashed rgba(255, 255, 255, 0.1);
-    border-radius: 1.25rem;
-    padding: 3rem 2rem;
+    border: 2px dashed rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius-md);
+    padding: 4rem 2rem;
     text-align: center;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.02);
+    transition: var(--transition-smooth);
+    background: #fff;
     cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.upload-area:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
 }
 
 .btn-remove {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    width: 1.75rem;
-    height: 1.75rem;
+    top: 1rem;
+    right: 1rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     border: none;
     background: rgba(255, 59, 48, 0.1);
     color: #ff3b30;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    transition: var(--transition-smooth);
 }
 
 .btn-remove:hover {
-    background: rgba(255, 59, 48, 0.2);
-}
-
-.upload-area:hover {
-    border-color: rgba(99, 102, 241, 0.4);
-    background: rgba(99, 102, 241, 0.04);
+    background: #ff3b30;
+    color: #fff;
 }
 
 .upload-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-.upload-area p {
-    color: rgba(255, 255, 255, 0.45);
+    font-size: 3rem;
     margin-bottom: 1.5rem;
 }
 
+.upload-area p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
 .btn-primary {
-    background: #f5f5f7;
-    color: #0a0a0a;
+    background: var(--accent-color);
+    color: #000;
     border: none;
-    padding: 0.85rem 2.25rem;
-    border-radius: 0.875rem;
+    padding: 1rem 2.5rem;
+    border-radius: var(--border-radius-sm);
     font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s ease;
-    letter-spacing: -0.01em;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 15px rgba(209, 233, 75, 0.2);
 }
 
 .btn-primary:hover {
+    background: var(--accent-dark);
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
-    background: #fff;
+    box-shadow: 0 8px 25px rgba(209, 233, 75, 0.4);
 }
 
 .btn-primary:disabled {
@@ -104,38 +106,33 @@
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
+    background: #ccc;
 }
 
 .file-name {
-    color: #f5f5f7;
-    font-weight: 600;
-    font-size: 1.05rem;
-    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 
 .file-size {
-    color: rgba(255, 255, 255, 0.35);
-    font-size: 0.85rem;
-    margin-bottom: 1rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
 }
 
 .actions {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
-}
-
-.btn-download {
-    padding: 1rem 2.5rem;
-    font-size: 1.05rem;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(15px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);

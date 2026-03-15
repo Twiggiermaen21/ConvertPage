@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'pdf', pathMatch: 'full' },
+    { path: '', pathMatch: 'full', loadComponent: () => import('./welcome/welcome').then(m => m.WelcomeComponent) },
     {
         path: 'pdf',
         loadComponent: () => import('./pdf/pdf').then(m => m.PdfComponent)

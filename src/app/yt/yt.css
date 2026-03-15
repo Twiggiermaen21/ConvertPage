@@ -1,11 +1,10 @@
 .tab-view {
-    padding: 2.5rem 3rem;
-    animation: fadeIn 0.35s ease-out;
+    animation: fadeIn 0.4s ease-out;
 }
 
 .tab-header {
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3.5rem;
 }
 
 .tab-icon {
@@ -14,90 +13,89 @@
 }
 
 .tab-header h1 {
-    font-size: 2.25rem;
-    font-weight: 800;
-    color: #f5f5f7;
-    margin: 0 0 0.35rem 0;
-    letter-spacing: -0.03em;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem 0;
 }
 
 .tab-header p {
-    color: rgba(255, 255, 255, 0.45);
-    font-size: 1.05rem;
+    color: var(--text-secondary);
+    font-size: 1rem;
     margin: 0;
 }
 
 .tab-content {
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
 }
 
 .url-input-area {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 1.25rem;
-    padding: 2rem;
+    background: #fff;
+    border-radius: var(--border-radius-md);
+    padding: 3rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
 }
 
 .url-input-area label {
     display: block;
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 500;
-    margin-bottom: 0.75rem;
-    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1rem;
 }
 
 .input-group {
     display: flex;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
 .input-group input {
     flex: 1;
-    padding: 0.85rem 1.25rem;
-    border-radius: 0.875rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.05);
-    color: #f5f5f7;
-    font-size: 0.95rem;
+    padding: 1rem 1.5rem;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: #f8f8f8;
+    color: var(--text-primary);
+    font-size: 1rem;
     outline: none;
-    transition: border-color 0.2s ease;
+    transition: var(--transition-smooth);
 }
 
 .input-group input::placeholder {
-    color: rgba(255, 255, 255, 0.25);
+    color: var(--text-muted);
 }
 
 .input-group input:focus {
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--accent-color);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(209, 233, 75, 0.1);
 }
 
 .btn-primary {
-    background: #f5f5f7;
-    color: #0a0a0a;
+    background: var(--accent-color);
+    color: #000;
     border: none;
-    padding: 0.85rem 2.25rem;
-    border-radius: 0.875rem;
+    padding: 1rem 2.5rem;
+    border-radius: 14px;
     font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: var(--transition-smooth);
     white-space: nowrap;
-    letter-spacing: -0.01em;
 }
 
 .btn-primary:hover {
+    background: var(--accent-dark);
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
-    background: #fff;
+    box-shadow: 0 8px 25px rgba(209, 233, 75, 0.3);
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(15px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
