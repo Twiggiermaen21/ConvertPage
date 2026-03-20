@@ -1,4 +1,5 @@
 import { Component, signal, output } from '@angular/core';
+import { environment } from '../../../environments/environment';
 import { formatFileSize } from '../pdf-shared';
 
 @Component({
@@ -59,7 +60,7 @@ export class ToJpgToolComponent {
         formData.append('file', file, file.name);
 
         try {
-            const response = await fetch('/api/pdf/to-jpg', {
+            const response = await fetch(`${environment.apiUrl}/pdf/to-jpg`, {
                 method: 'POST',
                 body: formData,
             });

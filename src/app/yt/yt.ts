@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Component({
     selector: 'app-yt',
@@ -28,7 +29,7 @@ export class YtComponent {
         }, 1000);
 
         try {
-            const response = await fetch('/api/yt/download', {
+            const response = await fetch(`${environment.apiUrl}/yt/download`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url: link })

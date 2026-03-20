@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Component({
     selector: 'app-audio',
@@ -58,7 +59,7 @@ export class AudioComponent {
         formData.append('target_format', this.targetFormat());
 
         try {
-            const response = await fetch('/api/audio/convert', {
+            const response = await fetch(`${environment.apiUrl}/audio/convert`, {
                 method: 'POST',
                 body: formData,
             });

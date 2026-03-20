@@ -1,6 +1,7 @@
 import { Component, signal, computed, output } from '@angular/core';
 import { CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { PdfPage, formatFileSize } from '../pdf-shared';
+import { environment } from '../../../environments/environment';
 
 type SplitStep = 'upload' | 'arenas';
 
@@ -172,7 +173,7 @@ export class SplitToolComponent {
         formData.append('split_config', JSON.stringify(splitConfig));
 
         try {
-            const response = await fetch('/api/pdf/split', { method: 'POST', body: formData });
+            const response = await fetch(`${environment.apiUrl}/pdf/split`, { method: 'POST', body: formData });
             if (!response.ok) throw new Error('Split failed');
             const blob = await response.blob();
             const url = window.URL.createObjectURL(blob);

@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Component({
     selector: 'app-img',
@@ -55,7 +56,7 @@ export class ImgComponent {
         formData.append('file', file, file.name);
 
         try {
-            const response = await fetch('/api/image/remove-background', {
+            const response = await fetch(`${environment.apiUrl}/image/remove-background`, {
                 method: 'POST',
                 body: formData,
             });

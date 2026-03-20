@@ -1,4 +1,5 @@
 import { Component, signal, output } from '@angular/core';
+import { environment } from '../../../environments/environment';
 import { formatFileSize } from '../pdf-shared';
 
 @Component({
@@ -138,7 +139,7 @@ export class CompressToolComponent {
         formData.append('dpi', this.dpi().toString());
 
         try {
-            const response = await fetch('/api/pdf/compress', {
+            const response = await fetch(`${environment.apiUrl}/pdf/compress`, {
                 method: 'POST',
                 body: formData,
             });
