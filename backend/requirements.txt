@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+celery
+redis
+PyMuPDF
+pypdf
+pydantic-settings
+python-multipart
+yt-dlp
+ffmpeg-python
+pdf2docx
+rembg          
+onnxruntime   
