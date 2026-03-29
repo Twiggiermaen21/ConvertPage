@@ -1,0 +1,135 @@
+/* ═══ Tool sub-view ═══ */
+.tool-view {
+    position: relative;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.tool-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+}
+
+.tool-title h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.tool-content {
+    max-width: 1900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* ═══ Upload ═══ */
+.upload-area {
+    position: relative;
+    border: 2px dashed rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius-md);
+    padding: 4rem 2rem;
+    text-align: center;
+    transition: var(--transition-smooth);
+    background: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.upload-area:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.file-name {
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.file-size {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ═══ Slider ═══ */
+.slider-section {
+    margin-top: 2.5rem;
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: var(--border-radius-sm);
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.slider-label {
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.slider-value {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.slider {
+    width: 100%;
+    height: 8px;
+    -webkit-appearance: none;
+    background: #f0f0f0;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border: 3px solid #fff;
+}
+
+/* ═══ Buttons ═══ */
+.btn-primary {
+    background: var(--accent-color);
+    color: #000;
+    border: none;
+    padding: 1rem 3rem;
+    border-radius: 14px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.btn-primary:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+}
+
+.actions {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,21 @@
+import { Routes } from '@angular/router';
+
+export const routes: Routes = [
+    { path: '', pathMatch: 'full', loadComponent: () => import('./welcome/welcome').then(m => m.WelcomeComponent) },
+    {
+        path: 'pdf',
+        loadComponent: () => import('./pdf/pdf').then(m => m.PdfComponent)
+    },
+    {
+        path: 'audio',
+        loadComponent: () => import('./audio/audio').then(m => m.AudioComponent)
+    },
+    {
+        path: 'yt',
+        loadComponent: () => import('./yt/yt').then(m => m.YtComponent)
+    },
+    {
+        path: 'img',
+        loadComponent: () => import('./img/img').then(m => m.ImgComponent)
+    }
+];

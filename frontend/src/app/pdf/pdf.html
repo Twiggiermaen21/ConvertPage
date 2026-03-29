@@ -1,0 +1,46 @@
+<div class="tab-view">
+    <div class="tab-header">
+        @if (selectedTool() !== null) {
+        <button class="btn-back" (click)="goToMenu()">← Wszystkie narzędzia</button>
+        }
+        <div class="tab-icon">📄</div>
+        <h1>PDF</h1>
+        <p>Narzędzia do pracy z plikami PDF</p>
+    </div>
+
+    <!-- Tool menu grid -->
+    @if (selectedTool() === null) {
+    <div class="tool-grid">
+        @for (tool of tools; track tool.id) {
+        <button class="tool-card" [class.disabled]="tool.disabled" (click)="!tool.disabled && selectTool(tool.id)">
+            @if(tool.disabled) {
+            <span class="badge">{{ tool.disabledReason }}</span>
+            }
+            <span class="tool-card-icon">{{ tool.icon }}</span>
+            <span class="tool-card-label">{{ tool.label }}</span>
+            <span class="tool-card-desc">{{ tool.desc }}</span>
+        </button>
+        }
+    </div>
+    }
+
+    <!-- Merge tool -->
+    @if (selectedTool() === 'merge') {
+    <app-merge-tool (back)="goToMenu()" />
+    }
+
+    <!-- Split tool -->
+    @if (selectedTool() === 'split') {
+    <app-split-tool (back)="goToMenu()" />
+    }
+
+    <!-- Compress tool -->
+    @if (selectedTool() === 'compress') {
+    <app-compress-tool (back)="goToMenu()" />
+    }
+
+    <!-- To JPG tool -->
+    @if (selectedTool() === 'to-jpg') {
+    <app-to-jpg-tool (back)="goToMenu()" />
+    }
+</div>

@@ -1,0 +1,35 @@
+<div class="tab-view">
+    <div class="tab-header">
+        <div class="tab-icon">🖼️</div>
+        <h1>Zdjęcia</h1>
+        <p>Narzędzia do pracy ze zdjęciami</p>
+    </div>
+
+    <div class="tab-content">
+        <div class="upload-area" (click)="fileInput.click()" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+            <input #fileInput type="file" accept="image/*" hidden (click)="$event.stopPropagation()"
+                (change)="onFileSelected($event)" />
+            @if (selectedFile()) {
+            <button class="btn-remove" (click)="removeFile($event)" title="Usuń plik">✕</button>
+            }
+            <div class="upload-icon">🖼️</div>
+            @if (selectedFile()) {
+            <p class="file-name">{{ selectedFile()!.name }}</p>
+            <p class="file-size">{{ (selectedFile()!.size / 1024).toFixed(1) }} KB</p>
+            } @else {
+            <p>Przeciągnij zdjęcie tutaj lub kliknij, aby wybrać</p>
+            }
+            @if (!selectedFile()) {
+            <button class="btn-primary">Wybierz zdjęcie</button>
+            }
+        </div>
+
+        @if (selectedFile()) {
+        <div class="actions">
+            <button class="btn-primary btn-download" (click)="removeBackground()" [disabled]="isProcessing()">
+                @if (isProcessing()) { ⏳ Usuwanie tła... ({{ elapsedSeconds() }}s) } @else { 🪄 Usuń tło i pobierz }
+            </button>
+        </div>
+        }
+    </div>
+</div>
